@@ -19,8 +19,20 @@ var apple = {
 };
 
 printFrame();
-printSnake();
-printApple();
+var running = true;
+while(running) {
+    printApple();
+    printSnake();
+    snake.x = snake.x + 1;
+    setTimeout(clearSnake, 20000000);
+
+}
+cursor.reset();
+
+function clearSnake() {
+    cursor.horizontalAbsolute(0).eraseLine();
+}
+
 
 function printFrame() {
     cursor.bg.grey();
