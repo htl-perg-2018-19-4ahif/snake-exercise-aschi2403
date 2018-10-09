@@ -1,4 +1,6 @@
 var ansi = require('ansi'), cursor = ansi(process.stdout);
+var keypress = require('keypress');
+keypress(process.stdin);
 
 const frame = {
     length: 30,
@@ -10,8 +12,15 @@ var snake = {
     x: 5,
     y: 6
 };
+var apple = {
+    x: 6,
+    y: 3,
+    size: 3
+};
+
 printFrame();
 printSnake();
+printApple();
 
 function printFrame() {
     cursor.bg.grey();
@@ -27,7 +36,7 @@ function printFrame() {
     printVertical(frame.length);
 
     // lower horizontal
-    cursor.goto(frame.length, frame.heigth);
+    cursor.goto(1, frame.heigth/2);
     printHorizontal();
 
     cursor.bg.reset();
@@ -50,6 +59,15 @@ function printSnake() {
     cursor.bg.green();
     cursor.goto(snake.x, snake.y);
     for(i = 0; i < snake.size; i++) {
+        cursor.write(' ');
+    }
+    cursor.bg.reset();
+}
+
+function printApple() {
+    cursor.bg.red();
+    cursor.goto(apple.x, apple.y);
+    for(i = 0; i < apple.size; i++) {
         cursor.write(' ');
     }
     cursor.bg.reset();
